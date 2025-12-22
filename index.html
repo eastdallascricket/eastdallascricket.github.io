@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>East Dallas Cricket Club (EDCC)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 50%, #d9e2ec 100%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            padding-top: 30px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Logo Styles */
+        .logo {
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto;
+            padding: 0 0 30px 0;
+            display: block;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Side by Side Container */
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* Player Counter Section */
+        .player-counter-section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .player-counter-section h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .player-count {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #5c6bc0;
+            text-shadow: 0 4px 15px rgba(92, 107, 192, 0.3);
+            margin: auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .countdown-section h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .target-date {
+            color: #5c6bc0;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .time-box {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 15px;
+            padding: 15px 12px;
+            min-width: 70px;
+            border: 2px solid rgba(92, 107, 192, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .time-box:hover {
+            transform: scale(1.05);
+            border-color: #5c6bc0;
+            box-shadow: 0 10px 30px rgba(92, 107, 192, 0.2);
+        }
+
+        .time-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5c6bc0;
+            text-shadow: 0 4px 15px rgba(92, 107, 192, 0.3);
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* Registration Section */
+        .registration-section {
+            margin-top: 40px;
+            background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(92, 107, 192, 0.3);
+            max-width: 1080px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .registration-section h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .registration-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .register-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #5c6bc0;
+            background: #fff;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .register-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #5c6bc0;
+        }
+
+        .registration-note {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            max-width: 1080px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #333;
+            padding: 15px 25px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 2px solid rgba(92, 107, 192, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            border-color: #5c6bc0;
+            box-shadow: 0 10px 30px rgba(92, 107, 192, 0.2);
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .instagram-icon {
+            fill: #E4405F;
+        }
+
+        .email-icon {
+            fill: #5c6bc0;
+        }
+
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Animation for numbers */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease;
+        }
+
+        /* Pulse animation for register button */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 10px 40px rgba(255, 255, 255, 0.4); }
+        }
+
+        .register-btn {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .register-btn:hover {
+            animation: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .player-counter-section,
+            .countdown-section {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .registration-section,
+            .contact-section {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                max-width: 280px;
+                padding: 0 0 20px 0;
+            }
+
+            .player-count {
+                font-size: 3.5rem;
+            }
+
+            .time-box {
+                min-width: 60px;
+                padding: 12px 8px;
+            }
+
+            .time-value {
+                font-size: 1.5rem;
+            }
+
+            .time-label {
+                font-size: 0.6rem;
+            }
+
+            .countdown-timer {
+                gap: 8px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .contact-item {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .registration-section {
+                padding: 30px 20px;
+            }
+
+            .registration-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .registration-section p {
+                font-size: 1rem;
+            }
+
+            .register-btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .time-box {
+                min-width: 50px;
+                padding: 10px 6px;
+            }
+
+            .time-value {
+                font-size: 1.3rem;
+            }
+
+            .time-label {
+                font-size: 0.55rem;
+            }
+
+            .countdown-timer {
+                gap: 5px;
+            }
+        }
+
+        /* Particle effect background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(92, 107, 192, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        
+        <!-- LOGO -->
+        <img src="./edcc.png" alt="Your Logo" class="logo">
+        
+        <!-- Side by Side Wrapper -->
+        <div class="content-wrapper">
+            
+            <!-- Player Counter Section -->
+            <div class="player-counter-section">
+                <h2>👨🏽 Registered Players 🏏</h2>
+                <div class="player-count" id="playerCount">0</div>
+            </div>
+            
+            <!-- Countdown Timer Section -->
+            <div class="countdown-section">
+                <h2>⏰ Countdown to Spring T20! 🏆</h2>
+                <p class="target-date">March 1, 2026</p>
+                <div class="countdown-timer">
+                    <div class="time-box">
+                        <span class="time-value" id="days">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="hours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="minutes">00</span>
+                        <span class="time-label">Mins</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="seconds">00</span>
+                        <span class="time-label">Secs</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Registration Section -->
+        <div class="registration-section">
+            <h2>📝 Register Now!</h2>
+            <p>Ready to join EDCC? Click below to fill out the registration form and secure your spot!</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1Pvgynv4OGK7MILjd8cS9DZqeoVZO5PK6xFIKd0DG2g-Beg/viewform" target="_blank" class="register-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                Register for Spring T20
+            </a>
+            <!-- <p class="registration-note">🕐 Registration closes February 15, 2026</p> -->
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>📬 Contact Us</h2>
+            <div class="contact-links">
+                
+                <!-- Instagram -->
+                <a href="https://instagram.com/eastdallascricket" target="_blank" class="contact-item">
+                    <div class="contact-icon">
+                        <svg class="instagram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">Instagram</span>
+                        <span class="contact-value">@eastdallascricket</span>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:eastdallascricket@gmail.com" class="contact-item">
+                    <div class="contact-icon">
+                        <svg class="email-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">eastdallascricket@gmail.com</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        // ==================== PLAYER COUNTER ====================
+        // Set your player count here
+        const playerCount = 38;
+
+        function updatePlayerDisplay() {
+            const countElement = document.getElementById('playerCount');
+            countElement.textContent = playerCount.toLocaleString();
+        }
+
+        updatePlayerDisplay();
+
+        // ==================== COUNTDOWN TIMER ====================
+        const targetDate = new Date('March 1, 2026 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.target-date').textContent = '🎉 Launch Day is Here!';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ==================== PARTICLE EFFECT ====================
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.width = (Math.random() * 6 + 4) + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>
