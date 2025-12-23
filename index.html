@@ -472,14 +472,13 @@
             }
         }
 
-        /* iOS background fix */
-        @supports (-webkit-touch-callout: none) {
+        @media (max-width: 768px) {
             body {
                 background-attachment: scroll;
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
             }
         }
+
+        /* Particle effect background */
         .particles {
             position: fixed;
             top: 0;
