@@ -539,7 +539,30 @@
         <!-- LOGO -->
         <img src="./edcc.png" alt="Your Logo" class="logo">
         
-        <!-- Side by Side Wrapper -->
+        <!-- First Row - Countdown Timer -->
+        <div class="countdown-section" style="max-width: 1080px; width: 100%; margin: 0 auto 30px auto;">
+            <h2>Spring T20 starts <span class="target-date">March 1, 2026</span></h2>
+            <div class="countdown-timer">
+                <div class="time-box">
+                    <span class="time-value" id="days">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second Row - Players and Teams -->
         <div class="content-wrapper">
             
             <!-- Player Counter Section -->
@@ -548,28 +571,10 @@
                 <div class="player-count" id="playerCount">0</div>
             </div>
             
-            <!-- Countdown Timer Section -->
-            <div class="countdown-section">
-                <h2>Spring T20 starts <span class="target-date">March 1, 2026</span></h2>
-                <!-- <p class="target-date">March 1, 2026</p> -->
-                <div class="countdown-timer">
-                    <div class="time-box">
-                        <span class="time-value" id="days">00</span>
-                        <span class="time-label">Days</span>
-                    </div>
-                    <div class="time-box">
-                        <span class="time-value" id="hours">00</span>
-                        <span class="time-label">Hours</span>
-                    </div>
-                    <div class="time-box">
-                        <span class="time-value" id="minutes">00</span>
-                        <span class="time-label">Mins</span>
-                    </div>
-                    <div class="time-box">
-                        <span class="time-value" id="seconds">00</span>
-                        <span class="time-label">Secs</span>
-                    </div>
-                </div>
+            <!-- Team Counter Section -->
+            <div class="player-counter-section">
+                <h2>Registered Teams</h2>
+                <div class="player-count" id="teamCount">0</div>
             </div>
             
         </div>
@@ -627,13 +632,23 @@
         // ==================== PLAYER COUNTER ====================
         // Set your player count here
         const playerCount = 38;
+        
+        // ==================== TEAM COUNTER ====================
+        // Set your team count here
+        const teamCount = 2;
 
         function updatePlayerDisplay() {
             const countElement = document.getElementById('playerCount');
             countElement.textContent = playerCount.toLocaleString();
         }
+        
+        function updateTeamDisplay() {
+            const countElement = document.getElementById('teamCount');
+            countElement.textContent = teamCount.toLocaleString();
+        }
 
         updatePlayerDisplay();
+        updateTeamDisplay();
 
         // ==================== COUNTDOWN TIMER ====================
         const targetDate = new Date('March 1, 2026 00:00:00').getTime();
